@@ -2,7 +2,10 @@ import React from "react";
 import { globals } from "../../utils/globals";
 
 export const ChatSidebar = ({ handleSetChannel, channel }) => (
-  <ul className="list-group list-group-flush border-bottom">
+  <ul
+    style={{ cursor: "pointer" }}
+    className="list-group list-group-flush border-bottom"
+  >
     {globals.channels.map((val) => {
       return (
         <li
@@ -10,11 +13,15 @@ export const ChatSidebar = ({ handleSetChannel, channel }) => (
             handleSetChannel(val);
           }}
           className={
-            "list-group-item text-center " + (val === channel ? "active" : "")
+            "list-group-item list-group-item-action " +
+            (val === channel ? "active" : "")
           }
           key={val}
         >
-          {val}
+          <strong>{val}</strong>
+          <div className="small text-muted text-truncate">
+            This is a lengthy text to test the subtitle
+          </div>
         </li>
       );
     })}

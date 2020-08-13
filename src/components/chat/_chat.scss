@@ -17,6 +17,12 @@
   -webkit-overflow-scrolling: touch;
 }
 
+.active {
+  background-color: $m-lightest-gray !important;
+  border-color: $m-lightest-gray !important;
+  color: black !important;
+}
+
 @keyframes fadein {
   from {
     opacity: 0;

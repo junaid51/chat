@@ -11,6 +11,8 @@ import { globals } from "../../utils/globals";
 import InputBox from "./InputBox";
 import linkify from "linkifyjs/html";
 import { executeNextInQueue } from "../../utils/globalFunctions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft as closeButton } from "@fortawesome/free-solid-svg-icons";
 
 const Chatbox = ({
   getGeneralChat,
@@ -23,6 +25,7 @@ const Chatbox = ({
   loadMoreChat,
   loadingMoreChat,
   chatScroll,
+  handleSetChannel,
 }) => {
   let dateStore = "";
   let currentDate = new Date();
@@ -165,6 +168,19 @@ const Chatbox = ({
     });
   return (
     <div className="chatbox">
+      <div className="d-flex ">
+        <button
+          style={{ color: "inherit" }}
+          className="btn"
+          type="button"
+          title="Close"
+          onClick={() => {
+            handleSetChannel("");
+          }}
+        >
+          <FontAwesomeIcon icon={closeButton} />
+        </button>
+      </div>
       <ul ref={listRef} className="list-unstyled px-3 chat-list text-break">
         {loadingMoreChat && (
           <div className="text-center mb-2">

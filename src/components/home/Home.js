@@ -55,14 +55,30 @@ class Home extends React.PureComponent {
         {user && (
           <>
             <div className="row no-gutters chat-container">
-              <div className="col col-sm-4 h-100 border-right">
+              <div
+                className={
+                  "col col-sm-4 h-100 border-right  d-sm-block " +
+                  (channel ? "d-none" : "d-block")
+                }
+              >
                 <ChatSidebar
                   handleSetChannel={this.handleSetChannel}
                   channel={channel}
                 />
               </div>
-              <div className="col-sm-8 d-none d-sm-block h-100">
-                {channel && <Chatbox user={user} channel={channel} />}
+              <div
+                className={
+                  "col col-sm-8 d-sm-block h-100 " +
+                  (channel ? "d-block" : "d-none")
+                }
+              >
+                {channel && (
+                  <Chatbox
+                    user={user}
+                    channel={channel}
+                    handleSetChannel={this.handleSetChannel}
+                  />
+                )}
               </div>
             </div>
           </>

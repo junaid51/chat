@@ -15,10 +15,12 @@ html {
   transition: $transition-time filter linear, 1s -webkit-filter linear;
 }
 html[data-theme="dark"] {
-  filter: invert(1) hue-rotate(180deg);
+  filter: invert(1) hue-rotate(185deg);
   & img {
-    filter: invert(1) hue-rotate(180deg);
+    filter: invert(1) hue-rotate(185deg);
   }
+  background-color: black !important;
+  color: white !important;
 }
 
 body {
@@ -56,6 +58,7 @@ ul,
 label {
   margin: 0;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
