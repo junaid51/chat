@@ -1,0 +1,43 @@
+.auth--container {
+  max-width: 500px;
+  width: 95%;
+  margin: 0 auto;
+}
+.auth--container {
+  text-align: center;
+}
+.auth--container label {
+  display: block;
+  text-align: left;
+}
+.auth--container input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: $s-size;
+  margin-bottom: 10px;
+  outline: none;
+}
+.auth--container input:focus {
+  border-bottom: 1px solid #000;
+}
+.auth--container button {
+  display: block;
+  margin: 5px auto;
+  padding: 15px 35px;
+  color: #fff;
+  background: #4d8fac;
+  transition: background 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+.auth--container button:hover {
+  background: #5d8cae;
+}
+
+.auth--container .checkbox {
+  display: inline-block;
+  width: auto;
+}

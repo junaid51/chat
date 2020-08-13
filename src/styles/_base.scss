@@ -1,0 +1,67 @@
+$transition-time: 300ms;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: white;
+  color: black;
+  -webkit-transition: $transition-time -webkit-filter linear;
+  -moz-transition: $transition-time -moz-filter linear;
+  -moz-transition: $transition-time filter linear;
+  -ms-transition: $transition-time -ms-filter linear;
+  -o-transition: $transition-time -o-filter linear;
+  transition: $transition-time filter linear, 1s -webkit-filter linear;
+}
+html[data-theme="dark"] {
+  filter: invert(1) hue-rotate(180deg);
+  & img {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+ul,
+label {
+  margin: 0;
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $m-divider;
+  outline: 1px solid $m-light-gray;
+  border-radius: 5px;
+}

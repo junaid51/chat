@@ -1,0 +1,8 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./normalize";
+@import "./variables";
+@import "./animations";
+@import "./base";
+@import "../components/Home/home";
+@import "../components/Auth/auth";
+@import "../components/Chat/chat";
