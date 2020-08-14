@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import Chatbox from "../chat/Chatbox";
 import {
   login,
   setPushNotificationToken,
@@ -9,7 +8,7 @@ import {
 import { globals } from "../../utils/globals";
 import firebase from "../../config/firebase";
 import { setValue, getValue } from "../../utils/globalFunctions";
-import { ChatSidebar } from "../chat/ChatSidebar";
+import { ChatSidebar, Chatbox } from "../chat";
 
 class Home extends React.PureComponent {
   constructor(props) {

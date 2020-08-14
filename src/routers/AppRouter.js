@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Home from "../components/home/Home";
-import Header from "../components/home/Header";
-import Login from "../components/auth/Login";
-import Register from "../components/auth/Register";
 import { Router, Switch, Route } from "react-router-dom";
 import ComponentNotFound from "../components/ComponentNotFound";
 import history from "../routers/history";
@@ -12,6 +8,8 @@ import UnauthenticatedRoute from "./UnauthenticatedRoute";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import { connect } from "react-redux";
 import { ProgressBar } from "../components/bs-components/Loaders";
+import { Header, Home } from "../components/home";
+import { Register, Login } from "../components/auth";
 
 const AppRouter = (props) => {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
