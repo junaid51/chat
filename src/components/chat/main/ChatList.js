@@ -18,7 +18,7 @@ const ChatList = ({ generalChat, user }) => {
     time: "",
   };
 
-  return generalChat.map((chat) => {
+  return generalChat.map((chat, index) => {
     const { user: lastUser, time: lastTime } = lastChatData;
     const postDate = new Date(chat.timestamp);
     const date =
@@ -41,27 +41,35 @@ const ChatList = ({ generalChat, user }) => {
     return (
       <React.Fragment key={chat.id}>
         {showDate && (
-          <li className="chat-list text-center my-2" key={date}>
+          <li className="text-center text-muted small my-2" key={date}>
             {date === currentDate ? "Today" : date}
           </li>
         )}
         <li
           className={
-            "chat-list mb-2 d-flex flex-row " +
-            (currUser ? "justify-content-end" : "")
+            "mb-1 d-flex flex-row " + (currUser ? "justify-content-end" : "")
           }
           key={chat.id}
         >
           <div style={{ maxWidth: "75%" }}>
-            <div className={currUser ? "text-right" : ""}>
+            <div className={currUser ? "text-right" : "text-left"}>
               {!currUser && showUser && (
                 <strong>{chat.user}&nbsp;&nbsp;</strong>
               )}
               {(showTime || showUser) && (
-                <span className="small text-muted">{time}</span>
+                <div className="small text-muted">{time}</div>
               )}
             </div>
-            <div dangerouslySetInnerHTML={{ __html: linkify(chat.message) }} />
+            <div
+              className={
+                (currUser ? "from-me" : "from-them") +
+                (generalChat[index + 1] &&
+                chat.user === generalChat[index + 1].user
+                  ? ""
+                  : " pointer")
+              }
+              dangerouslySetInnerHTML={{ __html: linkify(chat.message) }}
+            />
           </div>
         </li>
       </React.Fragment>

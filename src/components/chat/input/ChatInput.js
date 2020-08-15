@@ -7,7 +7,7 @@ const ChatInput = ({ handleSubmit }) => {
   const [message, setMessage] = useState("");
 
   return (
-    <div className="d-flex flex-column border-top">
+    <div className="d-flex flex-column mb-2 ml-2">
       <form
         autoComplete="off"
         className="d-flex"
@@ -23,7 +23,7 @@ const ChatInput = ({ handleSubmit }) => {
           type="text"
           name="message"
           id="message"
-          className="form-control border-0"
+          className="form-control border"
           placeholder="Leave a message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}

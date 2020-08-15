@@ -5,9 +5,11 @@ import { logout } from "../../store/actions/baseActions";
 import Theme from "./Theme";
 import { REGISTER, LOGIN } from "../../store/constants";
 
-const Header = ({ user, logout }) => {
+const Header = ({ user, channel, logout }) => {
   return (
-    <header className="border-bottom">
+    <header
+      className={"border-bottom d-sm-block " + (channel ? "d-none" : "d-block")}
+    >
       <nav
         className="navbar navbar-light"
         style={{
@@ -43,6 +45,7 @@ const Header = ({ user, logout }) => {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    channel: state.selectedChannel,
   };
 }
 function mapDispatchToProps(dispatch) {

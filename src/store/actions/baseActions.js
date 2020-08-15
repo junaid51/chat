@@ -5,6 +5,7 @@ import {
   HOME,
   LOGIN,
   LOADING,
+  SET_CHANNEL,
 } from "../constants";
 import firebase from "../../config/firebase";
 import history from "../../routers/history";
@@ -16,10 +17,6 @@ import {
 import { globals } from "../../utils/globals";
 
 const { gcmTokenName } = globals;
-
-export const setUser = (dispatch) => async (userObj) => {
-  dispatch({ type: SET_USER, payload: userObj });
-};
 
 const updateUserEntry = async (userObj) => {
   const userRef = firebase.database().ref("users/" + userObj.user_id);
@@ -41,7 +38,15 @@ const clearData = async (dispatch) => {
   history.push(LOGIN);
 };
 
-export const register = (dispatch) => async (email, username, password) => {
+const setUser = (dispatch) => async (payload) => {
+  dispatch({ type: SET_USER, payload });
+};
+
+const setChannel = (dispatch) => async (payload) => {
+  dispatch({ type: SET_CHANNEL, payload });
+};
+
+const register = (dispatch) => async (email, username, password) => {
   try {
     dispatch({ type: LOADING, payload: true });
     await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -61,7 +66,7 @@ export const register = (dispatch) => async (email, username, password) => {
   }
 };
 
-export const login = (dispatch) => async (email, password, save) => {
+const login = (dispatch) => async (email, password, save) => {
   try {
     dispatch({ type: LOADING, payload: true });
     if (email && password) {
@@ -86,7 +91,7 @@ export const login = (dispatch) => async (email, password, save) => {
   }
 };
 
-export const logout = (dispatch) => async () => {
+const logout = (dispatch) => async () => {
   try {
     await firebase.auth().signOut();
   } catch (e) {
@@ -95,3 +100,5 @@ export const logout = (dispatch) => async () => {
     clearData(dispatch);
   }
 };
+
+export { register, login, logout, setUser, setChannel };

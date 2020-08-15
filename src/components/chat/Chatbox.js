@@ -6,7 +6,6 @@ import {
   disconnect,
   loadMoreChat,
 } from "../../store/actions/chatActions";
-import { globals } from "../../utils/globals";
 import { ChatTopbar, ChatMain, ChatInput } from ".";
 
 const Chatbox = (props) => {
@@ -31,7 +30,7 @@ const Chatbox = (props) => {
 
   return (
     <div className="chatbox">
-      <ChatTopbar handleSetChannel={handleSetChannel} />
+      <ChatTopbar channel={channel} handleSetChannel={handleSetChannel} />
       <ChatMain user={user} channel={channel} {...remainingProps} />
       <ChatInput handleSubmit={handleSubmit} />
     </div>
@@ -40,7 +39,7 @@ const Chatbox = (props) => {
 
 function mapStateToProps(state) {
   return {
-    generalChat: state.chat[globals.selectedChannel],
+    generalChat: state.chat[state.selectedChannel],
     loading: state.loading,
     loadingMoreChat: state.loadingMoreChat,
     chatScroll: state.chatScroll,

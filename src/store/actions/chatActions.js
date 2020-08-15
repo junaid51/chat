@@ -55,7 +55,7 @@ const sendPushNotification = ({ name, message, channel }) => {
     });
 };
 
-export const postGeneralChat = (dispatch) => async (chat, channel) => {
+const postGeneralChat = (dispatch) => async (chat, channel) => {
   try {
     const chatRef = firebase.database().ref(chatroomPath + channel);
     chatRef.push(chat);
@@ -65,7 +65,7 @@ export const postGeneralChat = (dispatch) => async (chat, channel) => {
   }
 };
 
-export const getGeneralChat = (dispatch) => async (channel) => {
+const getGeneralChat = (dispatch) => async (channel) => {
   dispatch({ type: LOADING, payload: true });
 
   const chatRef = firebase.database().ref(chatroomPath + channel);
@@ -115,7 +115,7 @@ export const getGeneralChat = (dispatch) => async (channel) => {
     });
 };
 
-export const loadMoreChat = (dispatch) => async (channel, lastKey) => {
+const loadMoreChat = (dispatch) => async (channel, lastKey) => {
   if (loadMorePrevKey !== lastKey) {
     dispatch({ type: LOAD_MORE_LOADING, payload: true });
     const chatRef = firebase.database().ref(chatroomPath + channel);
@@ -143,6 +143,8 @@ export const loadMoreChat = (dispatch) => async (channel, lastKey) => {
   }
 };
 
-export const disconnect = (dispatch) => async () => {
+const disconnect = (dispatch) => async () => {
   disconnectChat();
 };
+
+export { postGeneralChat, getGeneralChat, loadMoreChat, disconnect };

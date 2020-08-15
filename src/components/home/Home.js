@@ -4,6 +4,7 @@ import {
   login,
   setPushNotificationToken,
   logout,
+  setChannel,
 } from "../../store/actions/baseActions";
 import { globals } from "../../utils/globals";
 import firebase from "../../config/firebase";
@@ -40,10 +41,15 @@ class Home extends React.PureComponent {
   }
 
   handleSetChannel = (channel) => {
-    this.setState({ channel: "" }, () => {
-      globals.selectedChannel = channel;
-      this.setState({ channel });
-    });
+    if (channel) {
+      this.setState({ channel: "" }, () => {
+        this.props.setChannel(channel);
+        this.setState({ channel });
+      });
+    } else {
+      this.setState({ channel: "" });
+      this.props.setChannel("");
+    }
   };
 
   render() {
@@ -96,6 +102,7 @@ function mapDispatchToProps(dispatch) {
   return {
     login: login(dispatch),
     logout: logout(dispatch),
+    setChannel: setChannel(dispatch),
   };
 }
 

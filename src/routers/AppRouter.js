@@ -11,7 +11,7 @@ import { ProgressBar } from "../components/bs-components/Loaders";
 import { Header, Home } from "../components/home";
 import { Register, Login } from "../components/auth";
 
-const AppRouter = (props) => {
+const AppRouter = ({ setUser }) => {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ const AppRouter = (props) => {
     firebase.auth().onAuthStateChanged((user) => {
       setLoading(false);
       if (user) {
-        props.setUser(user.toJSON());
+        setUser(user.toJSON());
         userHasAuthenticated(true);
       } else {
         userHasAuthenticated(false);

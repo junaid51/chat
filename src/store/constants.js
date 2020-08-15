@@ -8,6 +8,7 @@ export const LOADING = "loading";
 export const GET_CHAT = "getChat";
 export const LOAD_MORE_CHAT = "loadMoreChat";
 export const LOAD_MORE_LOADING = "loadMoreLoading";
+export const SET_CHANNEL = "setChannel";
 
 //routes
 export const HOME = "/";

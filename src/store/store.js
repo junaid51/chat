@@ -8,6 +8,7 @@ const initialState = {
   loading: false,
   loadingMoreChat: false,
   chatScroll: "down",
+  selectedChannel: "",
 };
 
 const store = createStore(baseReducer, initialState);

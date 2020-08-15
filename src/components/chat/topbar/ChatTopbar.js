@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft as closeButton } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft as backButton } from "@fortawesome/free-solid-svg-icons";
 
-const ChatTopbar = ({ handleSetChannel }) => (
+const ChatTopbar = ({ handleSetChannel, channel }) => (
   <div className="d-flex ">
     <button
       style={{ color: "inherit" }}
@@ -13,8 +13,14 @@ const ChatTopbar = ({ handleSetChannel }) => (
         handleSetChannel("");
       }}
     >
-      <FontAwesomeIcon icon={closeButton} />
+      <FontAwesomeIcon icon={backButton} />
     </button>
+    <div
+      className="text-truncate ml-2"
+      style={{ fontWeight: "400", fontSize: "1.5rem" }}
+    >
+      {channel}
+    </div>
   </div>
 );
 
