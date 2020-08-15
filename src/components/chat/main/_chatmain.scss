@@ -1,0 +1,18 @@
+.chatbox {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+
+.chat-list {
+  flex: 1;
+  overflow: auto;
+  animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s; /* Firefox */
+  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
+  -o-animation: fadein 0.5s; /* Opera */
+  -webkit-overflow-scrolling: touch;
+}
