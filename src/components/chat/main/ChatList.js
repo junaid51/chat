@@ -47,17 +47,23 @@ const ChatList = ({ generalChat, user }) => {
         )}
         <li
           className={
-            "mb-1 d-flex flex-row " + (currUser ? "justify-content-end" : "")
+            "mb-1 d-flex justify-content-end " +
+            (currUser ? "flex-row" : "flex-row-reverse")
           }
           key={chat.id}
         >
+          {(showTime || showUser) && (
+            <div
+              className="small text-muted mx-2 mt-auto"
+              style={{ lineHeight: "2rem" }}
+            >
+              {time}
+            </div>
+          )}
           <div style={{ maxWidth: "75%" }}>
             <div className={currUser ? "text-right" : "text-left"}>
               {!currUser && showUser && (
                 <strong>{chat.user}&nbsp;&nbsp;</strong>
-              )}
-              {(showTime || showUser) && (
-                <div className="small text-muted">{time}</div>
               )}
             </div>
             <div

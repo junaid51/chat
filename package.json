@@ -31,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build-prod": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build-prod": "set \"GENERATE_SOURCEMAP=false\" && npm run build",
     "dev-test": "npm run build && serve -s build"
   },
   "eslintConfig": {
