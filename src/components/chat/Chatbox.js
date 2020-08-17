@@ -8,34 +8,34 @@ import {
 } from "../../store/actions/chatActions";
 import { ChatTopbar, ChatMain, ChatInput } from ".";
 
-const Chatbox = (props) => {
-  const {
-    handleSetChannel,
-    postGeneralChat,
-    channel,
-    user,
-    ...remainingProps
-  } = props;
+class Chatbox extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  const handleSubmit = (message) => {
+  handleSubmit = (message) => {
+    const { channel, user } = this.props;
     if (message !== "") {
       const chat = {
         message,
         user: user.displayName,
         timestamp: new Date().getTime(),
       };
-      postGeneralChat(chat, channel);
+      this.props.postGeneralChat(chat, channel);
     }
   };
 
-  return (
-    <div className="chatbox">
-      <ChatTopbar channel={channel} handleSetChannel={handleSetChannel} />
-      <ChatMain user={user} channel={channel} {...remainingProps} />
-      <ChatInput handleSubmit={handleSubmit} />
-    </div>
-  );
-};
+  render() {
+    const { handleSetChannel, channel, user, ...remainingProps } = this.props;
+    return (
+      <div className="chatbox">
+        <ChatTopbar channel={channel} handleSetChannel={handleSetChannel} />
+        <ChatMain user={user} channel={channel} {...remainingProps} />
+        <ChatInput handleSubmit={this.handleSubmit} />
+      </div>
+    );
+  }
+}
 
 function mapStateToProps(state) {
   return {

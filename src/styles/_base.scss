@@ -1,39 +1,23 @@
-$transition-time: 300ms;
-
 * {
   box-sizing: border-box;
 }
 
-html {
-  background-color: white;
-  color: black;
-  -webkit-transition: $transition-time -webkit-filter linear;
-  -moz-transition: $transition-time -moz-filter linear;
-  -moz-transition: $transition-time filter linear;
-  -ms-transition: $transition-time -ms-filter linear;
-  -o-transition: $transition-time -o-filter linear;
-  transition: $transition-time filter linear, 1s -webkit-filter linear;
-}
-html[data-theme="dark"] {
-  filter: invert(1) hue-rotate(185deg);
-  & img {
-    filter: invert(1) hue-rotate(185deg);
-  }
-  & .from-me,
-  .from-them {
-    filter: invert(1) hue-rotate(185deg);
-    &.pointer {
-      &:after {
-        filter: invert(1) hue-rotate(185deg);
-      }
-    }
-  }
-  background-color: black !important;
-  color: white !important;
+body,
+#root {
+  /* disable pull to refresh when scrolling chat */
+  /* Break the flow */
+  position: absolute;
+  top: 0px;
+
+  /* Give them all the available space */
+  width: 100%;
+  height: 100%;
+
+  /* Allow them to scroll down the document */
+  overflow-y: hidden;
 }
 
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -41,21 +25,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Sending body at the bottom of the stack */
+  z-index: 1;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  justify-content: center;
-  -webkit-overflow-scrolling: touch;
+  /* Making the wrapper stack above the body */
+  z-index: 2;
 }
 
 code {

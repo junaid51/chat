@@ -1,0 +1,31 @@
+$transition-time: 200ms;
+
+html {
+  background-color: white;
+  color: black;
+  -webkit-transition: $transition-time -webkit-filter linear;
+  -moz-transition: $transition-time -moz-filter linear;
+  -moz-transition: $transition-time filter linear;
+  -ms-transition: $transition-time -ms-filter linear;
+  -o-transition: $transition-time -o-filter linear;
+  transition: $transition-time filter linear,
+    $transition-time -webkit-filter linear;
+}
+
+html[data-theme="dark"] {
+  filter: invert(1) hue-rotate(185deg);
+  & img {
+    filter: invert(1) hue-rotate(185deg);
+  }
+  & .from-me,
+  .from-them {
+    filter: invert(1) hue-rotate(185deg);
+    &.pointer {
+      &:after {
+        filter: invert(1) hue-rotate(185deg);
+      }
+    }
+  }
+  background-color: black !important;
+  color: white !important;
+}

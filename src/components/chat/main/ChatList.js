@@ -39,7 +39,7 @@ const ChatList = ({ generalChat, user }) => {
     lastChatData.time = time;
     dateStore = date;
     return (
-      <React.Fragment key={chat.id}>
+      <React.Fragment key={chat.id + "m"}>
         {showDate && (
           <li className="text-center text-muted small my-2" key={date}>
             {date === currentDate ? "Today" : date}
@@ -47,7 +47,7 @@ const ChatList = ({ generalChat, user }) => {
         )}
         <li
           className={
-            "mb-1 d-flex justify-content-end " +
+            "fadein chat mb-1 d-flex justify-content-end " +
             (currUser ? "flex-row" : "flex-row-reverse")
           }
           key={chat.id}

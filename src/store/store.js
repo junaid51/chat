@@ -11,6 +11,10 @@ const initialState = {
   selectedChannel: "",
 };
 
-const store = createStore(baseReducer, initialState);
+const store = createStore(
+  baseReducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 export default store;

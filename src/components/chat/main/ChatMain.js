@@ -81,7 +81,7 @@ const ChatMain = ({
             <Spinner />
           </div>
         )}
-        {infiniteScroll && <div key="intersecting" ref={bottomBoundaryRef} />}
+        {infiniteScroll && <li key="intersecting" ref={bottomBoundaryRef} />}
         {generalChat && <ChatList generalChat={generalChat} user={user} />}
       </ul>
       {loading && !generalChat && (
