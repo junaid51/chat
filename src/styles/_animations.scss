@@ -29,45 +29,27 @@
   }
 }
 
-.fadein {
-  animation: fadein 0.5s;
-  -moz-animation: fadein 0.5s; /* Firefox */
-  -webkit-animation: fadein 0.5s; /* Safari and Chrome */
-  -o-animation: fadein 0.5s; /* Opera */
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
-
-@keyframes fadein {
-  from {
+@-webkit-keyframes fadeIn {
+  0% {
     opacity: 0;
   }
-  to {
+  100% {
     opacity: 1;
   }
 }
-@-moz-keyframes fadein {
-  /* Firefox */
-  from {
+@keyframes fadeIn {
+  0% {
     opacity: 0;
   }
-  to {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fadein {
-  /* Safari and Chrome */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-o-keyframes fadein {
-  /* Opera */
-  from {
-    opacity: 0;
-  }
-  to {
+  100% {
     opacity: 1;
   }
 }

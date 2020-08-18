@@ -1,58 +1,33 @@
 import React from "react";
 import linkify from "linkifyjs/html";
+import { formatTimestamp } from "../../../utils/globalFunctions";
 
 const ChatList = ({ generalChat, user }) => {
-  let dateStore = "";
-  let currentDate = new Date();
-  currentDate =
-    currentDate.getDate() +
-    "/" +
-    (currentDate.getMonth() + 1) +
-    "/" +
-    currentDate.getUTCFullYear();
-  const lastChatData = {
-    user: "",
-    timestamp: "",
-    id: "",
-    message: "",
-    time: "",
-  };
+  const currentDate = formatTimestamp(new Date(), "DATE_WEEKDAY");
+  let lastChatData = {};
 
   return generalChat.map((chat, index) => {
-    const { user: lastUser, time: lastTime } = lastChatData;
+    const { user: lastUser, time: lastTime, date: lastDate } = lastChatData;
     const postDate = new Date(chat.timestamp);
-    const date =
-      postDate.getDate() +
-      "/" +
-      (postDate.getMonth() + 1) +
-      "/" +
-      postDate.getUTCFullYear();
-    const time = postDate.getHours() + ":" + postDate.getMinutes();
-    const showDate = date === dateStore ? false : true;
+    const date = formatTimestamp(postDate, "DATE_WEEKDAY");
+    const time = formatTimestamp(postDate, "TIME");
     const currUser = chat.user === user.displayName;
     const showUser = chat.user !== lastUser;
-    const showTime = time !== lastTime;
-    lastChatData.user = chat.user;
-    lastChatData.id = chat.id;
-    lastChatData.message = chat.message;
-    lastChatData.timestamp = chat.timestamp;
-    lastChatData.time = time;
-    dateStore = date;
+    lastChatData = { ...chat, time, date };
     return (
-      <React.Fragment key={chat.id + "m"}>
-        {showDate && (
-          <li className="text-center text-muted small my-2" key={date}>
+      <React.Fragment key={chat.id}>
+        {date !== lastDate && (
+          <li className="text-center text-muted small my-2">
             {date === currentDate ? "Today" : date}
           </li>
         )}
         <li
           className={
-            "fadein chat mb-1 d-flex justify-content-end " +
+            "fadeIn chat mb-1 d-flex justify-content-end " +
             (currUser ? "flex-row" : "flex-row-reverse")
           }
-          key={chat.id}
         >
-          {(showTime || showUser) && (
+          {(time !== lastTime || showUser) && (
             <div
               className="small text-muted mx-2 mt-auto"
               style={{ lineHeight: "2rem" }}

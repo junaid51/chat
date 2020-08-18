@@ -1,5 +1,28 @@
 import { set, get, del } from "idb-keyval";
 import { globals } from "./globals";
+const months = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
 const memoize = (fn) => {
   let cache = {};
@@ -81,4 +104,52 @@ const getOS = memoize(() => {
   return os;
 });
 
-export { setValue, deleteValue, getValue, initCap, getOS, disconnectChat };
+const formatTimestamp = (timestamp, type) => {
+  const day = days[timestamp.getDay()],
+    date = timestamp.getDate(),
+    month = months[timestamp.getMonth()],
+    year = timestamp.getFullYear();
+  let hr = timestamp.getHours(),
+    min = timestamp.getMinutes(),
+    ampm = "am";
+
+  min = (min < 10 ? "0" : "") + min;
+  if (hr > 12) {
+    hr -= 12;
+    ampm = "pm";
+  }
+
+  switch (type) {
+    case "DATE":
+      return date + " " + month + " " + year;
+    case "DATE_WEEKDAY":
+      return day + ", " + date + " " + month + " " + year;
+    case "TIME":
+      return hr + ":" + min + " " + ampm;
+    default:
+      return (
+        day +
+        ", " +
+        date +
+        " " +
+        month +
+        " " +
+        year +
+        ", " +
+        hr +
+        ":" +
+        min +
+        ampm
+      );
+  }
+};
+
+export {
+  setValue,
+  deleteValue,
+  getValue,
+  initCap,
+  getOS,
+  disconnectChat,
+  formatTimestamp,
+};
