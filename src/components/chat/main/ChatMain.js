@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { Spinner } from "../../bs-components/Loaders";
-import { executeNextInQueue } from "../../../utils/globalFunctions";
 import ChatList from "./ChatList";
 
 const ChatMain = ({
@@ -18,28 +17,6 @@ const ChatMain = ({
   const listRef = useRef(null);
   const firstChatRef = useRef(null);
   const prevScrollRef = useRef(null);
-
-  const scrollObserver = useCallback(
-    (node) => {
-      new IntersectionObserver((entries) => {
-        entries.forEach((en) => {
-          if (en.intersectionRatio > 0) {
-            if (!loadingMoreChat) {
-              loadMoreChat(channel, firstChatRef.current);
-              prevScrollRef.current = listRef.current.scrollHeight;
-            }
-          }
-        });
-      }).observe(node);
-    },
-    [channel, loadMoreChat, loadingMoreChat]
-  );
-
-  const bottomBoundaryRef = useCallback((node) => {
-    if (node) {
-      executeNextInQueue(scrollObserver, node);
-    }
-  }, []);
 
   useEffect(() => {
     getGeneralChat(channel);
@@ -72,6 +49,21 @@ const ChatMain = ({
       }
     }
   }, [generalChat]);
+
+  const bottomBoundaryRef = useCallback((node) => {
+    if (node) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.intersectionRatio > 0) {
+            if (!loadingMoreChat) {
+              loadMoreChat(channel, firstChatRef.current);
+              prevScrollRef.current = listRef.current.scrollHeight;
+            }
+          }
+        });
+      }).observe(node);
+    }
+  }, []);
 
   return (
     <>

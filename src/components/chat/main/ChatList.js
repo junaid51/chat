@@ -23,7 +23,7 @@ const ChatList = ({ generalChat, user }) => {
         )}
         <li
           className={
-            "fadeIn chat mb-1 d-flex justify-content-end " +
+            "chat mb-1 d-flex justify-content-end " +
             (currUser ? "flex-row" : "flex-row-reverse")
           }
         >

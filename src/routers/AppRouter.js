@@ -25,7 +25,7 @@ const AppRouter = ({ setUser }) => {
         userHasAuthenticated(false);
       }
     });
-  }, []);
+  }, [setUser]);
 
   return (
     <>

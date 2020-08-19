@@ -7,6 +7,7 @@ import {
   LOAD_MORE_CHAT,
   LOAD_MORE_LOADING,
   SET_CHANNEL,
+  SEARCH_USER,
 } from "../constants";
 
 export default function reducer(state, action) {
@@ -42,6 +43,11 @@ export default function reducer(state, action) {
       return {
         ...state,
         selectedChannel: action.payload,
+      };
+    case SEARCH_USER:
+      return {
+        ...state,
+        searchUser: [...(action.payload || [])],
       };
     case CLEAR_DATA:
       return {

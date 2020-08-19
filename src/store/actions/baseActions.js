@@ -6,6 +6,7 @@ import {
   LOGIN,
   LOADING,
   SET_CHANNEL,
+  SEARCH_USER,
 } from "../constants";
 import firebase from "../../config/firebase";
 import history from "../../routers/history";
@@ -17,6 +18,27 @@ import {
 import { globals } from "../../utils/globals";
 
 const { gcmTokenName } = globals;
+
+const getSearchUser = (dispatch) => async (search) => {
+  console.log(search);
+  const userRef = firebase.database().ref("users");
+  userRef
+    .orderByChild("email")
+    .startAt(search)
+    .endAt(search + "\uf8ff")
+    .once("value", (snapshot) => {
+      const value = snapshot.val();
+      console.table(value);
+      let userList = [];
+      if (value) {
+        for (const val in value) {
+          userList.push(value[val].email);
+        }
+        console.log(userList);
+      }
+      dispatch({ type: SEARCH_USER, payload: userList });
+    });
+};
 
 const updateUserEntry = async (userObj) => {
   const userRef = firebase.database().ref("users/" + userObj.user_id);
@@ -101,4 +123,4 @@ const logout = (dispatch) => async () => {
   }
 };
 
-export { register, login, logout, setUser, setChannel };
+export { register, login, logout, setUser, setChannel, getSearchUser };

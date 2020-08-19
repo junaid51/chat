@@ -5,11 +5,13 @@ import {
   setPushNotificationToken,
   logout,
   setChannel,
+  getSearchUser,
 } from "../../store/actions/baseActions";
 import { globals } from "../../utils/globals";
 import firebase from "../../config/firebase";
 import { setValue, getValue } from "../../utils/globalFunctions";
 import { ChatSidebar, Chatbox } from "../chat";
+import SearchBar from "./SearchBar";
 
 class Home extends React.PureComponent {
   constructor(props) {
@@ -52,9 +54,15 @@ class Home extends React.PureComponent {
     }
   };
 
+  handleSearch = (search) => {
+    if (search) {
+      this.props.getSearchUser(search);
+    }
+  };
+
   render() {
     const { channel } = this.state;
-    const { user } = this.props;
+    const { user, searchUser } = this.props;
     return (
       <div className="container-fluid p-0 main">
         {user && (
@@ -66,10 +74,16 @@ class Home extends React.PureComponent {
                   (channel ? "d-none" : "d-block")
                 }
               >
-                <ChatSidebar
-                  handleSetChannel={this.handleSetChannel}
-                  channel={channel}
+                <SearchBar
+                  handleSearch={this.handleSearch}
+                  searchUser={searchUser}
                 />
+                {!searchUser.length && (
+                  <ChatSidebar
+                    handleSetChannel={this.handleSetChannel}
+                    channel={channel}
+                  />
+                )}
               </div>
               <div
                 className={
@@ -96,6 +110,7 @@ class Home extends React.PureComponent {
 function mapStateToProps(state) {
   return {
     user: state.user,
+    searchUser: state.searchUser,
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -103,6 +118,7 @@ function mapDispatchToProps(dispatch) {
     login: login(dispatch),
     logout: logout(dispatch),
     setChannel: setChannel(dispatch),
+    getSearchUser: getSearchUser(dispatch),
   };
 }
 

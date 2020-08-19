@@ -9,10 +9,6 @@ import {
 import { ChatTopbar, ChatMain, ChatInput } from ".";
 
 class Chatbox extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   handleSubmit = (message) => {
     const { channel, user } = this.props;
     if (message !== "") {

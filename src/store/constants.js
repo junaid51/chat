@@ -9,6 +9,7 @@ export const GET_CHAT = "getChat";
 export const LOAD_MORE_CHAT = "loadMoreChat";
 export const LOAD_MORE_LOADING = "loadMoreLoading";
 export const SET_CHANNEL = "setChannel";
+export const SEARCH_USER = "searchUser";
 
 //routes
 export const HOME = "/";

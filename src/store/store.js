@@ -9,6 +9,7 @@ const initialState = {
   loadingMoreChat: false,
   chatScroll: "down",
   selectedChannel: "",
+  searchUser: [],
 };
 
 const store = createStore(
