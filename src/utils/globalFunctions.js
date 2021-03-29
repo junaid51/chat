@@ -75,6 +75,16 @@ const initCap = (str) => {
   });
 };
 
+const debounce = (fn, delay = 500) => {
+  let t;
+  return function() {
+    const that = this;
+    const args = arguments;
+    clearTimeout(t);
+    t = setTimeout(() => fn.apply(that, args), delay);
+  }
+}
+
 const disconnectChat = () => {
   if (globals.chatRef) {
     globals.chatRef.off();
@@ -152,4 +162,5 @@ export {
   getOS,
   disconnectChat,
   formatTimestamp,
+  debounce
 };

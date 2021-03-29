@@ -6,6 +6,7 @@ import {
   logout,
   setChannel,
   getSearchUser,
+  sendAddRequest,
 } from "../../store/actions/baseActions";
 import { globals } from "../../utils/globals";
 import firebase from "../../config/firebase";
@@ -55,9 +56,15 @@ class Home extends React.PureComponent {
   };
 
   handleSearch = (search) => {
+    console.log('bounce')
     if (search) {
       this.props.getSearchUser(search);
     }
+  };
+
+  handleAddUser = (userId) => {
+    console.log(this.props.user);
+    this.props.sendAddRequest(userId, this.props.user.uid);
   };
 
   render() {
@@ -76,6 +83,7 @@ class Home extends React.PureComponent {
               >
                 <SearchBar
                   handleSearch={this.handleSearch}
+                  handleAddUser={this.handleAddUser}
                   searchUser={searchUser}
                 />
                 {!searchUser.length && (
@@ -119,6 +127,7 @@ function mapDispatchToProps(dispatch) {
     logout: logout(dispatch),
     setChannel: setChannel(dispatch),
     getSearchUser: getSearchUser(dispatch),
+    sendAddRequest: sendAddRequest(dispatch),
   };
 }
 

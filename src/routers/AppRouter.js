@@ -10,8 +10,9 @@ import { connect } from "react-redux";
 import { ProgressBar } from "../components/bs-components/Loaders";
 import { Header, Home } from "../components/home";
 import { Register, Login } from "../components/auth";
+import Toastr from "../components/bs-components/Toast";
 
-const AppRouter = ({ setUser }) => {
+const AppRouter = ({ setUser, error }) => {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -30,6 +31,7 @@ const AppRouter = ({ setUser }) => {
   return (
     <>
       {loading && <ProgressBar />}
+      {error && <Toastr error={error} />}
       {!loading && (
         <Router history={history}>
           <Header />
@@ -60,10 +62,16 @@ const AppRouter = ({ setUser }) => {
   );
 };
 
+function mapStateToProps(state) {
+  return {
+    error: state.error,
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
     setUser: setUser(dispatch),
   };
 }
 
-export default connect(null, mapDispatchToProps)(AppRouter);
+export default connect(mapStateToProps, mapDispatchToProps)(AppRouter);

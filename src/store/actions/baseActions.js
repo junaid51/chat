@@ -28,16 +28,35 @@ const getSearchUser = (dispatch) => async (search) => {
     .endAt(search + "\uf8ff")
     .once("value", (snapshot) => {
       const value = snapshot.val();
-      console.table(value);
+      console.log(value);
       let userList = [];
       if (value) {
         for (const val in value) {
-          userList.push(value[val].email);
+          userList.push({
+            id: value[val].user_id,
+            email: value[val].email,
+          });
         }
         console.log(userList);
+      } else {
+        dispatch({ type: ERROR, payload: { message: "No users found!" } });
       }
       dispatch({ type: SEARCH_USER, payload: userList });
     });
+};
+
+const sendAddRequest = (dispatch) => async (userId, curUser) => {
+  console.log(userId);
+  await firebase
+    .database()
+    .ref("users/" + userId + "/requests/" + curUser)
+    .set({ user_id: curUser, type: "RECEIVE" });
+  await firebase
+    .database()
+    .ref("users/" + curUser + "/requests/" + userId)
+    .set({ user_id: userId, type: "SENT" });
+
+  dispatch({ type: ERROR, payload: { message: "Request has been sent!" } });
 };
 
 const updateUserEntry = async (userObj) => {
@@ -102,7 +121,6 @@ const login = (dispatch) => async (email, password, save) => {
             ? firebase.auth.Auth.Persistence.LOCAL
             : firebase.auth.Auth.Persistence.SESSION
         );
-      dispatch({ type: SET_USER, payload: user.toJSON() });
       history.push(HOME);
     } else {
       history.push(LOGIN);
@@ -123,4 +141,12 @@ const logout = (dispatch) => async () => {
   }
 };
 
-export { register, login, logout, setUser, setChannel, getSearchUser };
+export {
+  register,
+  login,
+  logout,
+  setUser,
+  setChannel,
+  getSearchUser,
+  sendAddRequest,
+};

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Spinner } from "../bs-components/Loaders";
+import Toastr from "../bs-components/Toast";
 
 class AuthForm extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class AuthForm extends React.Component {
         <h1>
           {component === "register" ? "Register" : "Login to"} your account
         </h1>
-        {error && <p className="error-message">{error.message}</p>}
         <form onSubmit={this.handleSubmit}>
           {component === "register" && (
             <>

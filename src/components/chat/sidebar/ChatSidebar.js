@@ -18,7 +18,7 @@ const ChatSidebar = ({ handleSetChannel, channel }) => (
           }
           key={val}
         >
-          <strong>{val}</strong>
+          <h5 className="fs-3">{val}</h5>
           <div className="small text-muted text-truncate">
             This is a lengthy text to test the subtitle
           </div>

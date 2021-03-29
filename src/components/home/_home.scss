@@ -17,19 +17,20 @@
 .search--container {
   & input {
     outline: none;
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid $m-divider;
   }
   & input:focus {
-    border-radius: 20px;
+    border-radius: 15px;
     border: 1px solid black;
   }
 }
 
 .searchIcon {
   position: absolute;
-  right: 14px;
-  top: 11px;
+  right: 12px;
+  top: 8px;
   font-size: 20px;
+  margin: 8px;
   color: $m-light-gray;
 }
